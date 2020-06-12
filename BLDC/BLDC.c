@@ -16,6 +16,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "BLDC.h"
+#include "Delay.h"
 
 /**
  * @defgroup Module Pin define
@@ -186,6 +187,8 @@ void BLDC_Set_Velocity(int16_t velocity)
 	// *******Count/second*******
 	DEC2HEX_converter(velocity,&JV_Message[4],&JV_Message[5]);
 	CANbus_Transmit(0x301,8,JV_Message);
+	delay_ms(200);
+	BLDC_Begin();
 }	
 uint8_t a=195;
 uint8_t b=0xC3;
@@ -300,7 +303,10 @@ int16_t BLDC_ReadVelocity(uint8_t* can_data)
 void BLDC_Config(void)
 {
 	BLDC_PDO_Enable(); // 1
+	delay_ms(200);
 	BLDC_Mode_Velocity();// 2 
+	delay_ms(200);
 	BLDC_Motor_On(); // 3
+	delay_ms(200);
 }
 

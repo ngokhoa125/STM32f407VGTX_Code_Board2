@@ -1,5 +1,5 @@
 Dependencies for Project 'NoiApSuat3', Target 'Target 1': (DO NOT MODIFY !)
-F (.\A_USER\main.c)(0x5EE2587B)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\A_USER\main.c)(0x5EE350FF)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (A_USER\stm32f4xx.h)(0x582097AB)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h)(0x5625C51C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB3990)
@@ -37,7 +37,7 @@ I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (A_USER\system_timetick.h)(0x4EC088C6)
-I (.\CAN\CAN.h)(0x5EE254A9)
+I (.\CAN\CAN.h)(0x5EE34C39)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB3986)
 I (.\Delay\Delay.h)(0x5EE254A9)
 I (.\BLDC\BLDC.h)(0x5EE254A9)
@@ -378,7 +378,7 @@ I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (.\A_USER\system_timetick.h)(0x4EC088C6)
 F (.\Delay\Delay.h)(0x5EE254A9)()
-F (.\CAN\CAN.c)(0x5EE254A9)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\can.o --omf_browse .\objects\can.crf --depend .\objects\can.d)
+F (.\CAN\CAN.c)(0x5EE34C39)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\can.o --omf_browse .\objects\can.crf --depend .\objects\can.d)
 I (.\A_USER\stm32f4xx.h)(0x582097AB)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h)(0x5625C51C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB3990)
@@ -415,11 +415,11 @@ I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x581CC67B)
 I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x581CC67B)
 I (.\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h)(0x581CC67B)
 I (.\A_USER\system_timetick.h)(0x4EC088C6)
-I (CAN\CAN.h)(0x5EE254A9)
+I (CAN\CAN.h)(0x5EE34C39)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB3986)
 I (.\Delay\Delay.h)(0x5EE254A9)
-F (.\CAN\CAN.h)(0x5EE254A9)()
-F (.\BLDC\BLDC.c)(0x5EE254A9)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\bldc.o --omf_browse .\objects\bldc.crf --depend .\objects\bldc.d)
+F (.\CAN\CAN.h)(0x5EE34C39)()
+F (.\BLDC\BLDC.c)(0x5EE351F7)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\bldc.o --omf_browse .\objects\bldc.crf --depend .\objects\bldc.d)
 I (.\A_USER\stm32f4xx.h)(0x582097AB)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h)(0x5625C51C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB3990)
@@ -461,8 +461,9 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB3986)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DB3988)
 I (BLDC\BLDC.h)(0x5EE254A9)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x55DB3986)
+I (.\Delay\Delay.h)(0x5EE254A9)
 F (.\BLDC\BLDC.h)(0x5EE254A9)()
-F (.\GPIO\KB_GPIO.c)(0x5EE2563D)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\kb_gpio.o --omf_browse .\objects\kb_gpio.crf --depend .\objects\kb_gpio.d)
+F (.\GPIO\KB_GPIO.c)(0x5EE2F693)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I..\NoiApSuat3 -I.\A_USER -I.\BLDC -I.\Delay -I.\CAN -I.\GPIO -I.\STM32F4xx_StdPeriph_Driver\inc-I D:\GitHub\STM32f407VGTX_Code_Board2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DHSE_VALUE="8000000" --C99-o .\objects\kb_gpio.o --omf_browse .\objects\kb_gpio.crf --depend .\objects\kb_gpio.d)
 I (.\A_USER\stm32f4xx.h)(0x582097AB)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h)(0x5625C51C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB3990)
