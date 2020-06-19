@@ -14,6 +14,12 @@
 #include "system_timetick.h"
 #include "CAN.h"
 #include "Delay.h"
+#include "BLDC.h"
+#include "main.h"
+#include "KB_GPIO.h"
+#include "math.h"
+#include "stdio.h"
+#include "stdlib.h"
 /**
  * @defgroup Module Pin define
  * @{
@@ -44,16 +50,22 @@
  * @}
  */
 
-static int ID_Computer = 0x121;
-static int ID_Board_UP = 0x122;
-//static int ID_Board_DOWN = 0x123;
+//static int ID_Computer = 0x121;
+//static int ID_Board_UP = 0x122;
+static int ID_Elmo = 0x281;
+static int ID_Board_DOWN = 0x122;
 
 
 uint8_t CAN_RxMessage[8];
 uint8_t CAN_TxMessage[8];
 CanRxMsg RxMessage;//Gan CanRxMsg thanh RxMessage
-
-
+int16_t BLDC_VELOCITY;
+int ENC_VELOCITY;
+uint8_t BLDC_STATUS=1;
+uint8_t BLDC_DIRECTION=1;
+uint8_t BLDC_Send_Data[8];
+uint8_t Temp_BLDC_Send_Data[4];
+uint8_t Connection;
 void CAN_init(void)
 {
 //	Khai bao GPIO cho CAN1
@@ -104,10 +116,10 @@ void CAN_init(void)
 	CAN_FilterInitStruct.CAN_FilterNumber = 0;
 	CAN_FilterInitStruct.CAN_FilterMode = CAN_FilterMode_IdList;
 	CAN_FilterInitStruct.CAN_FilterScale = CAN_FilterScale_16bit;
-	CAN_FilterInitStruct.CAN_FilterIdHigh = ID_Board_UP << 5;
-	CAN_FilterInitStruct.CAN_FilterIdLow = ID_Computer << 5;
-	CAN_FilterInitStruct.CAN_FilterMaskIdHigh = ID_Computer << 5;
-	CAN_FilterInitStruct.CAN_FilterMaskIdLow = ID_Board_UP << 5;
+	CAN_FilterInitStruct.CAN_FilterIdHigh = ID_Elmo << 5;
+	CAN_FilterInitStruct.CAN_FilterIdLow = ID_Board_DOWN << 5;
+	CAN_FilterInitStruct.CAN_FilterMaskIdHigh = ID_Board_DOWN << 5;
+	CAN_FilterInitStruct.CAN_FilterMaskIdLow = ID_Elmo << 5;
 	CAN_FilterInitStruct.CAN_FilterFIFOAssignment = 0;
 	CAN_FilterInitStruct.CAN_FilterActivation = ENABLE;
 	CAN_FilterInit(&CAN_FilterInitStruct);
@@ -190,15 +202,91 @@ void Convert_Byte2Float(uint8_t* _data_in, float* _data_out)
 	*_data_out=_number._value;
 }
 
-
+void Process_Thurster(void)
+{
+	Connection=Check_Connect();
+	if (Connection)
+	{
+				if ((RxMessage.Data[1]==WRITE_DATA)&&(RxMessage.Data[2]==VELOCITY))
+				{
+					BLDC_VELOCITY=(int16_t)( RxMessage.Data[3]+(RxMessage.Data[4]<<8));
+//					if (BLDC_DIRECTION==2) BLDC_VELOCITY=-BLDC_VELOCITY;
+					BLDC_Set_Velocity(BLDC_VELOCITY);
+				}
+				else if ((RxMessage.Data[1]==WRITE_DATA)&&(RxMessage.Data[2]==START))
+				{
+						if (BLDC_STATUS==0) 
+						{BLDC_Motor_On();
+						BLDC_STATUS=1;}
+				}
+				else if ((RxMessage.Data[1]==WRITE_DATA)&&(RxMessage.Data[2]==STOP))
+				{
+						if (BLDC_STATUS==1) 
+						{BLDC_Motor_Off();
+						BLDC_STATUS=0;}
+				}
+//				else if ((RxMessage.Data[1]==WRITE_DATA)&&(RxMessage.Data[2]==DIRECTION))
+//				{
+//					LED_Ping();	
+//					if (RxMessage.Data[3]==1)
+//							BLDC_DIRECTION=1;
+//					else if (RxMessage.Data[3]==2)
+//							BLDC_DIRECTION=2;
+//				}
+	}
+}
+void Process_All_Data(void)
+{
+				int rand_velocity=0;
+				rand_velocity=rand()%1000;
+				VX();
+				Connection=Check_Connect();
+				if ((Connection==1)&&(RxMessage.Data[1]==READ_DATA)&&(RxMessage.Data[2]==0x00))
+				{
+					//SEND STATUS OF MOTOR//
+				BLDC_Send_Data[0]=THURSTER;
+				BLDC_Send_Data[1]=STATUS_DATA;
+				BLDC_Send_Data[2]=BLDC_STATUS_ENUM;
+				BLDC_Send_Data[3]=BLDC_STATUS;
+				BLDC_Send_Data[4]=BLDC_STATUS;
+				BLDC_Send_Data[5]=BLDC_STATUS;
+				BLDC_Send_Data[6]=BLDC_STATUS;
+				BLDC_Send_Data[7]=KCAN_Checksum(BLDC_Send_Data);
+				KCAN_TransData(ID_Board_DOWN,8,BLDC_Send_Data);
+					//SEND VOLOCITY//
+					delay_ms(2);
+				BLDC_Send_Data[0]=THURSTER;
+				BLDC_Send_Data[1]=STATUS_DATA;
+				BLDC_Send_Data[2]=REQ_VELOCITY;
+				Convert_Float2Byte(rand_velocity,Temp_BLDC_Send_Data);
+				BLDC_Send_Data[3]=Temp_BLDC_Send_Data[0];
+				BLDC_Send_Data[4]=Temp_BLDC_Send_Data[1];
+				BLDC_Send_Data[5]=Temp_BLDC_Send_Data[2];
+				BLDC_Send_Data[6]=Temp_BLDC_Send_Data[3];
+				BLDC_Send_Data[7]=KCAN_Checksum(BLDC_Send_Data);
+				KCAN_TransData(ID_Board_DOWN,8,BLDC_Send_Data);
+			}
+}
 
 void KCAN_CAN_IRQHandler(void)
 {
 	CAN_Receive(KCAN_CAN,CAN_FIFO0,&RxMessage);
 	//--------Thruster--------//
-	if((RxMessage.StdId == ID_Board_UP)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 8)&&(KCAN_Checksum(RxMessage.Data) == RxMessage.Data[7]))
+	if((RxMessage.StdId == ID_Elmo)&&(RxMessage.Data[0]=='V')&&(RxMessage.Data[1]=='X'))
 	{
-		
-		
+	
+		if ((RxMessage.Data[6]==0x00) && (RxMessage.Data[7]==0x00))
+		{
+		ENC_VELOCITY=Encoder_data(RxMessage.Data[5],3,2)+Encoder_data(RxMessage.Data[4],1,0);
+		}
+		else if ((RxMessage.Data[6]==0xFF) && (RxMessage.Data[7]==0xFF))
+		{
+	  ENC_VELOCITY=-Encoder_data(0xFF-RxMessage.Data[5],3,2)-Encoder_data(0x100-RxMessage.Data[4],1,0);
+		}
+	}
+	if((RxMessage.StdId == ID_Board_DOWN)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 8)&&(KCAN_Checksum(RxMessage.Data) == RxMessage.Data[7]))
+	{
+		if (RxMessage.Data[0]==THURSTER) Process_Thurster();
+		else if (RxMessage.Data[0]==ALL_DATA) Process_All_Data();
 	}
 }

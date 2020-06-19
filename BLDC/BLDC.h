@@ -53,5 +53,5 @@ void BLDC_Set_Velocity(int16_t velocity);
 uint16_t Encoder_data(uint8_t q,uint8_t x,uint8_t y);
 int16_t BLDC_ReadVelocity(uint8_t* can_data);
 void BLDC_Config(void);
-
+void VX (void);
 #endif 

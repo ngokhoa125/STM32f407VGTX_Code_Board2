@@ -122,10 +122,14 @@ void BLDC_Begin(void)
 void BLDC_Motor_On(void)
 {
 	CANbus_Transmit(0x301,8,MO1_Message);
+	delay_ms(100);
+	BLDC_Begin();
 }
 void BLDC_Motor_Off(void)
 {
 	CANbus_Transmit(0x301,8,MO0_Message);
+	delay_ms(100);
+	BLDC_Begin();
 }
 void BLDC_Velocity_Zero(void)
 {
@@ -168,6 +172,7 @@ void DEC2HEX_converter(int16_t numberDEC,uint8_t* HEXvalue1,uint8_t* HEXvalue2)
 		}
 		i++;	
 	}
+
 	DECvalue1=b[2]*pow(16,1)+b[1]*pow(16,0);
 	DECvalue2=b[4]*pow(16,1)+b[3]*pow(16,0);
 	if (numberDEC >0)
@@ -300,6 +305,11 @@ int16_t BLDC_ReadVelocity(uint8_t* can_data)
 	 Delay(200);
 	 CAN1open_transmit(0x301,8,BG_Message);
 ***************************************************************/
+void VX (void)
+{
+	CANbus_Transmit(0x301,8,VX_Message);
+
+}
 void BLDC_Config(void)
 {
 	BLDC_PDO_Enable(); // 1
@@ -308,5 +318,6 @@ void BLDC_Config(void)
 	delay_ms(200);
 	BLDC_Motor_On(); // 3
 	delay_ms(200);
-}
+	
+	}
 

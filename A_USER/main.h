@@ -8,7 +8,7 @@
 __IO uint32_t uwTimingDelay;
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
-
+uint8_t Check_Connect(void);
 								
 
 /* FUNCTION------------------------------------------------------------------*/
